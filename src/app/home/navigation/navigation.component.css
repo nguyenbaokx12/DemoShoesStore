@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+h2,
+h1,
+h3,
+h4,
+a,
+span,
+p {
+    font-family: 'Nunito', sans-serif;
+}
+
+.nav_info {
+    height: 30px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 130px;
+    z-index: 2;
+}
+
+.nav_info-left span i,
+.nav_info-right i,
+span {
+    color: white;
+    font-size: smaller;
+}
+
+.nav_info-right a {
+    text-decoration: none;
+}
+
+.nav_info-right a i {
+    padding: 0 15px;
+    font-size: medium;
+}
+
+.nav_info-right a i:hover {
+    color: rgb(143, 138, 138);
+}
+
+
+.icon_search {
+    border: 1px solid rgb(109, 105, 105);
+    border-radius: 24px;
+    margin-right: 5px;
+}
+
+.icon_search input {
+    border: none;
+    border-radius: 24px;
+}
+
+.icon_search input:focus {
+    outline: none;
+}
+
+.nav_icon i {
+    padding: 10px;
+}
+
+.nav_main {
+    position: sticky;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    z-index: 100;
+    transition: height 0.2s;
+    box-shadow: 0 4px 7px -5px rgba(91, 89, 89, 0.55)
+}
+
+
+.nav_main a img {
+    width: 90px;
+    height: 80px;
+}
+
+.nav_item ul li {
+    list-style: none;
+    display: inline;
+    padding: 30px 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav_item ul li:hover {
+    cursor: pointer;
+    color: rgb(109, 105, 105);
+}
+
+.nav_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow {
+    transform: rotate(180deg);
+    font-size: x-small;
+    transition: all 0.3s;
+}
+
+.arrow:hover {
+    transform: rotate(0deg);
+}
+
+ul>li:hover .arrow {
+    transform: rotate(0deg);
+}
+
+.nav_item {
+    position: relative;
+}
+
+.nav_product:hover .nav_item-product,
+.nav_product:hover .nav_item-product a {
+    opacity: 1;
+    visibility: visible;
+}
+
+.manager:hover .nav_item-manager,
+.manager:hover .nav_item-manager a {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav_item-product {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    background-color: white;
+    border-radius: 5px;
+    top: 57px;
+    left: 113px;
+    transition: all 0.4s;
+}
+
+.nav_item-product a,
+.nav_item-manager a {
+    opacity: 0;
+    text-decoration: none;
+    font-size: small;
+    color: black;
+    padding: 10px;
+    margin: 5px;
+    transition: all 0.4s;
+}
+
+.nav_item-product a:hover,
+.nav_item-manager a:hover {
+    background-color: rgb(109, 105, 105);
+    color: white !important;
+    border-radius: 5px;
+}
+
+.nav_item-manager {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    background-color: white;
+    border-radius: 5px;
+    top: 57px;
+    right: 20px;
+    transition: all 0.4s;
+}
+
+.nav_item ul li a{
+    color: black;
+    text-decoration: none;
+}
+
+.nav_item ul li a:hover{
+    color: rgb(109, 105, 105);
+}
+
+.nav_info-icon a{
+    color: black;
+}

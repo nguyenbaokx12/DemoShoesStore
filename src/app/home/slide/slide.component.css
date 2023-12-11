@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+h2,
+h1,
+h3,
+h4,
+a,
+span,
+p {
+    font-family: 'Nunito', sans-serif;
+}
+
+.slider_container{
+    width: 1226px;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 12px 0;
+}
+
+img{
+    border: 1px solid rgb(229, 232, 234);
+    border-radius: 10px;
+}

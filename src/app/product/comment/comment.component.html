@@ -1,0 +1,70 @@
+<!-- Modal Vote -->
+<div class="modal fade" id="addCmt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Đánh Giá Sản Phẩm</h1>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="commentForm" (ngSubmit)="submit()" class="d-flex flex-column">
+          <div class="rating">
+            <input formControlName="vote" value="5" id="5" type="radio">
+            <label for="5"></label>
+            <input formControlName="vote" value="4" id="4" type="radio">
+            <label for="4"></label>
+            <input formControlName="vote" value="3" id="3" type="radio">
+            <label for="3"></label>
+            <input formControlName="vote" value="2" id="2" type="radio">
+            <label for="2"></label>
+            <input formControlName="vote" value="1" id="1" type="radio">
+            <label for="1"></label>
+          </div>
+          <textarea formControlName="content" placeholder="Nhận xét của bạn" cols="30" rows="10"></textarea>
+          <div class="modal-footer">
+            <button type="submit" class="btn" data-bs-dismiss="modal">Xác Nhận</button>
+            <button type="button" class="btn" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENT -->
+<div class="comment-container">
+  <div *ngFor="let cmt of cmtList">
+    <div *ngIf="products == cmt.productId">
+      <div class="comment-content">
+        <div class="d-flex justify-content-between">
+          <h4 style="margin: 0;">{{ cmt.userId }}</h4>
+          <button [hidden]="cmt.userId != users" type="button" class="btn-close" (click)="GetIdDelete(cmt.id)"
+            data-bs-toggle="modal" data-bs-target="#deletecmt"></button>
+        </div>
+        <div class="rating" *ngFor="let star of getStarArray(cmt.vote)" style="margin: 0;">
+          <i class="fa fa-star d-flex"></i>
+        </div>
+        <p style="color: rgb(130, 128, 128); font-size: 14px;">{{ cmt.dateTime | date: 'medium' }}</p>
+        <p>{{ cmt.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal DELETE -->
+<div class="modal fade" id="deletecmt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Comment</h1>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xoá comment này của bạn ???
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-bs-dismiss="modal" (click)="DeleteCmt()">Xác Nhận</button>
+        <button type="button" class="btn" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

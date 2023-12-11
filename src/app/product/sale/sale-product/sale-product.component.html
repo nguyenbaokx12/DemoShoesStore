@@ -1,0 +1,35 @@
+<app-navigation></app-navigation>
+<app-carousel></app-carousel>
+<app-slide></app-slide>
+
+
+<div class="main">
+    <h2 style="text-align: center;"><strong>SẢN PHẨM ĐANG SALE</strong></h2>
+    <div class="sale_item-main">
+        <div class="sale_item-container" routerLink="/sale/{{item.id}}/{{userId}}"
+            *ngFor="let item of saleProducts">
+            <div class="sale_product-img">
+                <img class="img_main" [src]="item.imgSale">
+                <img class="img_sub" [src]="item.imgSub1">
+                <div class="btn_func">
+                    <button routerLink="/sale/{{item.id}}/{{userId}}">Xem Nhanh</button>
+                </div>
+            </div>
+            <div class="sale_product-text d-flex flex-column align-items-center">
+                <p><strong>{{item.nameSaleProduct}}</strong></p>
+                <p>{{item.priceSale |  currency:'VND'}} <span
+                        style="text-decoration: line-through; color: rgb(117, 117, 117); margin-left: 5px;">{{item.cost
+                        |  currency:'VND'}}</span></p>
+
+                <p style="color: rgb(18, 138, 8); font-size: 15px;">{{item.percentSale}}% sale</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <pagination-controls style="margin: 40px 0;" class="pagination justify-content-center" previousLabel="" nextLabel=""
+    ellipsisLabel="..." (pageChange)="p = $event">
+</pagination-controls> -->
+
+<app-listbrand></app-listbrand>

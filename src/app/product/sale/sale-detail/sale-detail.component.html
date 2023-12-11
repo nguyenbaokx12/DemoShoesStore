@@ -1,0 +1,103 @@
+<app-navigation></app-navigation>
+
+<div class="insert-layer">
+    <a routerLink="/home/{{users}}"><i class="fa-solid fa-angle-left"></i></a>
+</div>
+
+<div class="sale_container" *ngIf="saleProduct">
+    <div class="overlay">
+        <div class="sale_over">
+            <div class="sale_sub">
+                <img [src]="saleProduct.imgSale" onmouseover="changeImage(this)">
+                <img [src]="saleProduct.imgSub1" onmouseover="changeImage(this)">
+                <img [src]="saleProduct.imgSub2" onmouseover="changeImage(this)">
+                <img [src]="saleProduct.imgSub3" onmouseover="changeImage(this)">
+                <img [src]="saleProduct.imgSub4" onmouseover="changeImage(this)">
+            </div>
+            <div class="sale_main">
+                <img id="main-image" [src]="saleProduct.imgSale">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sale_content">
+        <h2>{{saleProduct.nameSaleProduct}}</h2>
+        <p>{{saleProduct.priceSale | currency:'VND'}}
+            <span style="text-decoration: line-through; color: rgb(117, 117, 117); margin-left: 5px;">{{saleProduct.cost
+                | currency:'VND'}}</span>
+            <span style="color: rgb(18, 138, 8); font-size: 15px; margin-left: 10px;">{{ saleProduct.percentSale}}%
+                sale</span>
+        </p>
+
+
+        <div style="margin-top: 60px;margin-bottom: 12px;">
+            <div class="d-flex justify-content-between align-items-center">
+                <p style="margin-bottom: 0;">Chọn kích cỡ:</p>
+                <!-- Button trigger modal -->
+                <a style="color: #817e7e; cursor: pointer; text-decoration: underline;" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Hướng dẫn kích cỡ
+                </a>
+            </div>
+
+            <div class="size-product-list">
+                <div *ngFor="let item of sizeProductList,let i = index"
+                    class="form-check item-size d-flex justify-content-center align-items-center">
+                    <ng-container *ngFor="let check of quantityList">
+                        <ng-container *ngIf="check.idProduct == saleProduct.id">
+                            <ng-container *ngIf="item.idSize == check.idSize">
+                                <input type="radio" name="size" [value]="check.id" id="size{{i}}"
+                                    [disabled]="check.quantity === 0">
+                                <label for="size{{i}}">{{item.numberSize}}</label>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column" style="margin-bottom: 50px;">
+            <a class="add-cart" (click)="addCart()"><strong>THÊM VÀO GIỎ</strong></a>
+            <a class="order" (click)="buyNow()"><strong>MUA NGAY</strong></a>
+        </div>
+
+
+        <div style="border-top: 1px solid #ccc;padding: 30px 0px;">
+            <h2>Mô Tả</h2>
+            <p style="font-size: medium;">{{saleProduct.describe}}</p>
+        </div>
+
+        <div style="border-top: 1px solid #ccc; padding-top: 30px;">
+            <h2>Các Thông Tin Sản Phẩm</h2>
+            <p>Mọi đơn hàng bạn đặt được giao hàng tiêu chuẩn miễn phí.</p>
+            <p>Giao hàng từ 1-2 ngày sau khi bạn đặt, 4-5 ngày để nhận hàng của bạn.</p>
+            <p>Đơn hàng được xử lý và giao từ Thứ Hai đến Thứ Bảy (trừ ngày lễ).</p>
+            <p>Hỗ trợ đổi size nếu khách đặt nhầm size giày, lỗi nhà sản xuất.</p>
+            <p>Nếu phát hiện sản phẩm có vấn đề đừng vội đánh giá sao vì nó sẽ ảnh hưởng rất lớn đến gian hàng của shop.
+                (Các bạn yêu quý đánh giá giúp mình 5* nha). Hãy liên hệ với mình qua hotline hoặc email để mình giải
+                đáp, tư vấn và phục vụ các bạn.</p>
+            <p>Hotline: 0329002453</p>
+            <p>Gmail : baokx2k3com</p>
+            <p>Địa chỉ cửa hàng: 86 Nguyễn Minh Chấn, Liên Chiểu, Đà Nẵng.</p>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addCmt">
+            Đánh Giá Sản Phẩm
+        </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <img src="https://cdn.gumac.vn/image/01/onpage5/8/bang-size-giay-us-nu201120191350133204.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<app-comment></app-comment>
+
+
+<div style="height: 1000px;"></div>

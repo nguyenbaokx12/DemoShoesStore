@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+h2,
+h1,
+h3,
+h4,
+a,
+span,
+p {
+    font-family: 'Nunito', sans-serif;
+}
+
+.insert-layer {
+    margin-top: 40px;
+    margin-left: 50px;
+    height: 50px;
+}
+
+.insert-layer a {
+    padding: 20px;
+    border-radius: 5px;
+    color: black;
+    border: 1px solid #ccc;
+    transition: all .3s;
+}
+
+.insert-layer a:hover {
+    border: 1px solid black;
+}
+
+
+.sale_container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px;
+}
+
+.sale_over {
+    display: flex;
+    flex-direction: row;
+    row-gap: 16px;
+    column-gap: 16px;
+    align-content: flex-start;
+    padding-left: 48px;
+    margin: 48px 8px 0px 8px;
+    width: 728px;
+    max-height: 669px;
+    min-height: 455px;
+    position: sticky;
+    top: 40px;
+
+}
+
+.sale_sub {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: 8px;
+    column-gap: 8px;
+    max-width: 75px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.sale_sub img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.sale_main {
+    position: relative;
+    width: 535px;
+    height: 669px;
+}
+
+.sale_main img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.overlay {
+    position: relative;
+
+}
+
+.sale_sub img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.sale_main img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: opacity 0.3s;
+}
+
+.sale_sub img:hover+.sale_main img {
+    opacity: 0;
+}
+
+.sale_content {
+    padding: 4px 48px 0px 24px;
+    margin-top: 48px;
+    margin-right: 8px;
+}
+
+.size-product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.size-product-list .item-size {
+    background-color: rgb(240, 240, 240);
+    padding-left: 0px !important;
+}
+
+.size-product-list .item-size input {
+    display: none;
+}
+
+.size-product-list .item-size label {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+}
+
+.size-product-list .item-size:hover label {
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.size-product-list .item-size input[type="radio"]:checked+label {
+    border: 1px solid #000;
+}
+
+.size-product-list .item-size input[type="radio"]:disabled+label {
+    cursor: default;
+    color: rgb(221, 221, 221);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid #ccc;
+}
+
+.modal-content img {
+    width: 814px;
+    height: 805px;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content img {
+    width: 814px;
+    height: 805px;
+}
+
+
+
+.add-cart {
+    padding: 14px 15px;
+    border: 1px solid #212121;
+    color: #212121;
+    text-align: center;
+    text-decoration: none;
+    z-index: 1;
+    position: relative;
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.add-cart::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #212121;
+    z-index: -1;
+    transition: all 250ms
+}
+
+.add-cart:hover {
+    color: #e8e8e8;
+    cursor: pointer;
+}
+
+.add-cart:hover::before {
+    width: 100%;
+}
+
+
+.order {
+    padding: 14px 15px;
+    margin-top: 10px;
+    color: white;
+    background-color: #212121;
+    text-align: center;
+    text-decoration: none;
+    z-index: 1;
+    position: relative;
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.order::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid #212121;
+    z-index: -1;
+    transition: all 250ms
+}
+
+.order:hover {
+    color: #212121;
+    cursor: pointer;
+}
+
+.order:hover::before {
+    width: 100%;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    transition: all .3s;
+
+}
+
+.btn:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}

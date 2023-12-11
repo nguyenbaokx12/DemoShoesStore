@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="wrap d-flex">
+    <div class="main">
+      <div class="main-header">
+        <a style="font-size: 30px; text-decoration: none; color: black;" routerLink="/home/{{users}}">SHOES STORE</a>
+        <nav
+          style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;); margin-top: 15px;"
+          aria-label="breadcrumb">
+          <ol class="breadcrumb" style="margin-bottom: 0;">
+            <li class="breadcrumb-item"><a routerLink="/cart/{{users}}"
+                style="color: #338dbc; text-decoration: none;">Giỏ hàng</a></li>
+            <li class="breadcrumb-item active" aria-current="page" style="color: black;">Thông tin giao hàng</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="info-orders">
+        <h5>Thông tin giao hàng</h5>
+        <div class="info-person">
+          <form [formGroup]="information" class="row g-3" style="padding-bottom: 16px;" (ngSubmit)="updateInfo()">
+            <div class="user-box col-md-4">
+              <label>Họ:</label>
+              <input class="form-control" formControlName="firstname" type="text" required="">
+            </div>
+            <div class="user-box col-md-8">
+              <label>Tên:</label>
+              <input class="form-control" formControlName="name" type="text" required="">
+            </div>
+            <div class="user-box col-md-12">
+              <label>Email:</label>
+              <input class="form-control" formControlName="email" type="email" required="">
+            </div>
+          </form>
+          <form [formGroup]="addInfo" class="row g-3" (ngSubmit)="addNewInfo()">
+            <div class="user-box col-md-12">
+              <label for="phone">Số Điện Thoại Người Nhận:</label>
+              <input formControlName="phone" class="form-control" type="text" required="">
+            </div>
+            <div class="user-box col-md-12">
+              <label for="address">Địa Chỉ Giao Hàng:</label>
+              <input formControlName="address" class="form-control" type="text" required="">
+            </div>
+            <div class="user-box col-md-12">
+              <label for="note">Ghi Chú:</label>
+              <textarea formControlName="note" class="form-control"></textarea>
+            </div>
+            <div class="user-box col-md-12">
+              <label>Phương Thức Thanh Toán:</label>
+              <div class="col-md-12 form-control method">
+                <input type="radio" checked name="payment-method" id="COD" value="true">
+                <label style="color: #4B5563;" for="COD">Thanh toán khi giao hàng</label>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <a routerLink="/cart/{{users}}" style="color: #338dbc; text-decoration: none;">Giỏ hàng</a>
+              <button type="submit" class="btn">Hoàn Tất Đơn Hàng</button>
+            </div>
+          </form>
+         
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="product-payment">
+        <div *ngFor="let item of cartList">
+          <div *ngIf="users === item.userId">
+            <div *ngFor="let p of quantityList">
+              <div *ngIf="item.quantityId == p.id">
+                <div *ngFor="let sale of saleList">
+                  <div *ngFor="let size of sizeList">
+                    <div *ngIf="p.idProduct == sale.id && p.idSize == size.idSize"
+                      class="line-item d-flex justify-content-center align-items-center">
+                      <a routerLink="/sale/{{sale.id}}/{{users}}">
+                        <img width="64" height="64" [src]="sale.imgSub1">
+                      </a>
+                      <span class="thumbnail-quantity">{{item.numberOrders}}</span>
+                      <div style="width: 255px;padding-left: 15px;">
+                        <a routerLink="/sale/{{sale.id}}/{{users}}" style="color: black; text-decoration: none;">
+                          <h3 style="font-size: 14px;">
+                            <strong>{{sale.nameSaleProduct}}</strong>
+                          </h3>
+                          <p style="color: gray; font-size: 13px; margin: 0;">Size:
+                            {{size.numberSize}}</p>
+                        </a>
+                      </div>
+                      <div style="width: 150px; margin-top: 7px;">
+                        <p style="text-align: center; font-size: 14px; margin: 0; ">
+                          <strong>
+                            {{sale.priceSale * item.numberOrders | currency:'VND'}}
+                          </strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="payment-detail">
+        <div class="payment-content d-flex flex-column"
+          style="padding: 25px 0;  border-bottom: 1px solid #ccc;border-top: 1px solid #ccc;">
+          <div class="d-flex justify-content-between align-items-center">
+            <p style="color: gray; margin: 0;">Tạm tính:</p>
+            <p style="text-align: center; font-size: 14px; margin: 0; ">
+              <strong>
+                {{total() | currency:'VND'}}
+              </strong>
+            </p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p style="color: gray; margin: 0;">Phí vận chuyển:</p>
+            <p style="text-align: center; font-size: 14px; margin: 0; ">
+              <strong>
+                ₫0
+              </strong>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center" style="padding-top: 25px;">
+          <h5>Tổng cộng:</h5>
+          <p style="text-align: center; font-size: 25px; margin: 0; ">
+            <strong>
+              {{total() | currency:'VND'}}
+            </strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

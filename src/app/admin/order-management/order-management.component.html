@@ -1,0 +1,137 @@
+<app-navigation></app-navigation>
+
+<div class="insert-layer d-flex align-items-center">
+  <a routerLink="/home/{{users}}"><i class="fa-solid fa-angle-left"></i></a>
+  <h2 style="margin-left: 100px;"><strong>Quản Lý Đơn Hàng</strong></h2>
+</div>
+
+<table>
+  <tr>
+    <th>Mã Đơn Hàng</th>
+    <th>Khách Hàng</th>
+    <th>Ngày Tạo Đơn</th>
+    <th>Sản Phẩm</th>
+    <th>Tổng Tiền</th>
+    <th>Trạng Thái Đơn Hàng</th>
+    <th>Quản Lý</th>
+  </tr>
+  <tr *ngFor="let i of infoList">
+    <td>{{i.id}}</td>
+    <td>
+      <div *ngFor="let u of userList">
+        <div *ngIf="i.userId == u.id">
+          {{u.firstname}} {{u.name}}, {{i.phone}}, {{i.address}}
+        </div>
+      </div>
+    </td>
+    <td>{{i.datePayment | date: 'short' }}</td>
+    <td style="text-align: center;"><i class="fa-solid fa-eye" data-bs-toggle="modal" data-bs-target="#detail"
+        (click)="GetIdInfo(i.id)"></i></td>
+    <td>{{Total(i.id) | currency:'VND'}}</td>
+    <td [ngStyle]="{'color': FormatStatusColor(i.status)}"><strong>{{FormatStatus(i.status)}}</strong></td>
+    <td>
+      <div class="d-flex justify-content-around">
+        <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit" (click)="OpenModal(i.id)"></i>
+        <i class="fa-regular fa-trash-can" data-bs-toggle="modal" data-bs-target="#delete"
+          (click)="GetIdInfo(i.id)"></i>
+        <!-- Modal Delete -->
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá Thông Tin Đơn Hàng</h1>
+              </div>
+              <div class="modal-body">
+                Bạn có muốn xoá đơn hàng với mã: <strong>{{inFoId}}</strong> ??
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal" (click)="DeleteI()">Xác Nhận</button>
+                <button type="button" class="btn" data-bs-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Modal Detail -->
+<div class="modal fade" id="detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Chi Tiết Đơn Hàng</h1>
+      </div>
+      <div class="modal-body">
+        <table style="margin: 0; width: 100%;">
+          <ng-container *ngFor="let h of historyList">
+            <ng-container *ngIf="inFoId === h.infoId">
+              <ng-container *ngFor="let q of quantityList">
+                <ng-container *ngIf="h.quantityId == q.id">
+                  <ng-container *ngFor="let p of saleList">
+                    <ng-container *ngIf="q.idProduct == p.id">
+                      <tr>
+                        <td><img [src]="p.imgSub1" alt="" width="80" height="80"
+                            style="border-radius: 10px; border: 1px solid #ccc;"></td>
+                        <ng-container *ngFor="let size of sizeProductList">
+                          <ng-container *ngIf="size.idSize === q.idSize">
+                            <td>Size {{size.numberSize}}</td>
+                          </ng-container>
+                        </ng-container>
+                        <td>Số Lượng: {{h.numberOrders}}</td>
+                        <td>Thành Tiền: {{h.numberOrders * p.priceSale | currency:'VND'}}</td>
+                      </tr>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh Sửa Trạng Thái Đơn Hàng</h1>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="InfoForm" (ngSubmit)="Edit()">
+          <div class="d-flex flex-column">
+            <div class="form-check">
+              <input formControlName="status" class="form-check-input " type="radio" name="status"
+                style="height: 20px !important; width: 20px;border-radius: 50% !important;" id="0" value="0">
+              <label class="form-check-label" for="0" style="color: rgb(55,125,246);"><strong>Chờ xác nhận</strong></label>
+            </div>
+            <div class="form-check">
+              <input formControlName="status" class="form-check-input" type="radio" name="status"
+                style="height: 20px !important; width: 20px;border-radius: 50% !important;" id="1" value="1">
+              <label class="form-check-label" for="1" style="color: rgb(72,157,114);"><strong>Đã xác nhận</strong></label>
+            </div>
+            <div class="form-check">
+              <input formControlName="status" class="form-check-input" type="radio" name="status"
+                style="height: 20px !important; width: 20px;border-radius: 50% !important;" id="2" value="2">
+              <label class="form-check-label" for="2" style="color: red;"><strong>Huỷ bỏ</strong></label>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="submit" class="btn" data-bs-dismiss="modal">Xác Nhận</button>
+            <button type="button" class="btn" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

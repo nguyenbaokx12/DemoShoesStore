@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+h2,
+h1,
+h3,
+h4,
+a,
+span,
+p {
+    font-family: 'Nunito', sans-serif;
+}
+
+.main {
+    width: 1320px;
+    margin: 50px auto;
+    padding: 5px;
+}
+
+.sale_item-container {
+    width: 321px;
+    height: 485px;
+}
+
+.sale_product-img {
+    width: 100%;
+    height: 373px;
+    object-fit: contain;
+    position: relative;
+    overflow: hidden;
+}
+
+.sale_product-img img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.img_sub {
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.sale_item-container:hover .img_sub {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.sale_product-text {
+    padding: 20px 0;
+}
+
+.sale_product-text p {
+    margin: 0;
+}
+
+.btn_func {
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: all .4s;
+}
+
+.btn_func button {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgb(95, 92, 92);
+    border: none;
+}
+
+.sale_item-container:hover .btn_func {
+    opacity: 1;
+    height: 38px;
+}
+
+.sale_item-main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}

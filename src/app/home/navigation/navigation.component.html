@@ -1,0 +1,71 @@
+<div class="nav_info">
+    <div class="nav_info-left">
+        <span><i class="bi bi-phone" style="padding: 0 10px;"></i> Gọi chúng tôi: 0389056171
+        </span>
+        <span style="margin: 0 30px;"> <i class="bi bi-geo-alt" style="padding: 0 10px;"></i>
+            Hoà Khánh, Liên Chiểu, Đà Nẵng
+        </span>
+    </div>
+    <div class="nav_info-right">
+        <a href=""> <i class="bi bi-facebook"></i>
+        </a>
+        <a href=""> <i class="bi bi-twitter"></i>
+        </a>
+        <a href=""> <i class="bi bi-youtube"></i>
+        </a>
+        <a href=""> <i class="bi bi-instagram"></i>
+        </a>
+    </div>
+</div>
+<div *ngIf="isMenuVisible" class="nav_main d-flex justify-content-around">
+    <div>
+        <a href="">
+            <img class="imgLogo"
+                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/shoe-store-logo-design-template-da7acb3f6546068cbc2272814166e8a4_screen.jpg?ts=1635317713">
+        </a>
+    </div>
+    <div class="nav_item">
+        <ul style="margin: 0 10px; padding: 10px;">
+            <li><a routerLink="/home/{{users}}">Trang Chủ</a></li>
+            <li class="nav_product"><a href="">Sản Phẩm </a><i class="fa-solid fa-chevron-down arrow"></i>
+                <div class="nav_item-product d-flex flex-column">
+                    <a href="">Nike</a>
+                    <a href="">Adidas</a>
+                    <a href="">Vans</a>
+                    <a href="">MLB</a>
+                    <a href="">Jordan</a>
+                    <a href="">New Blance</a>
+                </div>
+            </li>
+            <li><a href="">Liên Hệ</a></li>
+            <li><a href="">Giảm Giá</a></li>
+            <li *ngIf="isadmin" class="manager"><a href="">Quản Lý </a><i class="fa-solid fa-chevron-down arrow"></i>
+                <div class="nav_item-manager d-flex flex-column">
+                    <a routerLink="/account/{{users}}">Tài Khoản</a>
+                    <a routerLink="/order/{{users}}">Đơn Hàng</a>
+                    <a href="">Sản Phẩm</a>
+                    <a href="">Thu Nhập</a>
+                    <a href="">Phản Hồi</a>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="nav_icon">
+        <div class="icon_search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm Kiếm">
+        </div>
+        <div class="nav_info-icon">
+            <a routerLink="/cart/{{users}}"> <i class="fa-solid fa-basket-shopping position-relative">
+                    <span [hidden]="totalNumber() == 0" style="font-size: x-small;" class="position-absolute top-0 translate-middle badge rounded-pill bg-danger">
+                        {{totalNumber()}}
+                    </span></i>
+            </a>
+
+            <a routerLink="/resume/{{users}}"><i class="fa-solid fa-user"></i></a>
+            <a routerLink=""> <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</div>

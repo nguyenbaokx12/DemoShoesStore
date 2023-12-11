@@ -1,0 +1,94 @@
+<app-navigation></app-navigation>
+
+
+
+
+<div class="cart-bg">
+</div>
+
+<div class="container">
+    <div class="main">
+        <h3 style="margin-bottom: 25px; text-align: center;"><strong>GIỎ HÀNG CỦA BẠN</strong></h3>
+
+        <div class="list-cart">
+            <p style="font-size: 14px;"><strong>Bạn đang có {{QuantityOrder()}} sản phẩm trong giỏ hàng</strong></p>
+            <div *ngFor="let item of cartList">
+                <div *ngIf="users === item.userId">
+                    <div *ngFor="let p of quantityList">
+                        <div *ngIf="item.quantityId == p.id">
+                            <div *ngFor="let sale of saleList">
+                                <div *ngFor="let size of sizeList">
+                                    <div *ngIf="p.idProduct == sale.id && p.idSize == size.idSize" class="line-item">
+                                        <a routerLink="/sale/{{sale.id}}/{{users}}">
+                                            <img [src]="sale.imgSub1">
+                                        </a>
+                                        <div style="width: 255px;">
+                                            <a routerLink="/sale/{{sale.id}}/{{users}}"
+                                                style="color: black; text-decoration: none;">
+                                                <h3 style="font-size: 14px;">
+                                                    <strong>{{sale.nameSaleProduct}}</strong>
+                                                </h3>
+                                                <p style="color: gray; font-size: 13px; margin: 0;">Size:
+                                                    {{size.numberSize}}</p>
+                                            </a>
+
+                                        </div>
+                                        <div class="d-flex justify-content-center align-items-center line-quantity">
+                                            <button (click)="decreaseNumberOrders(item)">-</button>
+                                            <p>{{item.numberOrders}}</p>
+                                            <button (click)="increaseNumberOrders(item)" [disabled]="item.numberOrders == p.quantity">+</button>
+                                        </div>
+                                        <div style="width: 136px;">
+                                            <p style="text-align: center; font-size: 14px; margin: 0;">
+                                                {{sale.priceSale | currency:'VND'}}</p>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center"
+                                            style="width: 150px; margin-top: 7px;">
+                                            <p style="color: gray; font-size: 13px; margin: 0;">Thành tiền:</p>
+                                            <p
+                                                style="text-align: center; font-size: 14px; margin: 0; color: rgb(193, 4, 4);">
+                                                {{sale.priceSale * item.numberOrders | currency:'VND'}}</p>
+                                            <button (click)="delete(item)"
+                                                style="border: none; background-color: rgb(240, 240, 240);">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-policy d-flex flex-column justify-content-center">
+                <h3><strong>Chính sách Đổi/Trả</strong></h3>
+                <p><i class="fa-solid fa-arrow-right-long"></i> Sản phẩm được đổi 1 lần duy nhất, không hỗ trợ trả.
+                </p>
+                <p><i class="fa-solid fa-arrow-right-long"></i> Sản phẩm còn đủ tem mác, chưa qua sử dụng.</p>
+                <p><i class="fa-solid fa-arrow-right-long"></i> Sản phẩm nguyên giá được đổi trong 30 ngày trên toàn
+                    hệ
+                    thống.</p>
+                <p><i class="fa-solid fa-arrow-right-long"></i> Sản phẩm sale chỉ hỗ trợ đổi size (nếu cửa hàng còn)
+                    trong 7 ngày trên toàn hệ thống.</p>
+            </div>
+        </div>
+    </div>
+    <div class="payment">
+        <a routerLink="/home/{{users}}">Tiếp tục mua hàng <i class="fa-solid fa-arrow-right-long"></i></a>
+        <div class="order-sumary">
+            <h3 style="font-size: 16px; margin-top: 10px; margin-bottom: 15px;"><strong>Thông tin đơn hàng</strong>
+            </h3>
+            <div style="padding-top: 15px; padding-bottom: 10px; border-top: 1px gray dotted; border-bottom: 1px gray dotted;"
+                class="d-flex justify-content-between align-content-center">
+                <p style="font-size: 14px;"><strong>Tổng tiền:</strong></p>
+                <p style="font-size: 14px;"><strong>{{ calculateTotal() | currency:'VND' }}</strong></p>
+            </div>
+            <div style="height: 44px;"></div>
+            <div class="adddd">
+                <a class="add-cart" (click)="ToPayment()"><strong>THANH TOÁN</strong></a>
+            </div>
+        </div>
+    </div>
+
+</div>
